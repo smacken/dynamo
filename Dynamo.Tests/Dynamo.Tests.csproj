@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamoHostTests.cs" />
     <Compile Include="DynamoTests.cs" />
     <Compile Include="ImpromptuTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

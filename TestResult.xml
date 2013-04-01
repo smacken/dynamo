@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\dev\dynamo\Dynamo.Tests\bin\Debug\Dynamo.Tests.dll" total="6" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-30" time="23:49:29">
+<test-results name="C:\dev\dynamo\Dynamo.Tests\bin\Debug\Dynamo.Tests.dll" total="9" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-31" time="16:14:10">
   <environment nunit-version="2.6.2.12296" clr-version="2.0.50727.5466" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\dev\dynamo" machine-name="FEZZRIG" user="my" user-domain="FEZZRIG" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\dev\dynamo\Dynamo.Tests\bin\Debug\Dynamo.Tests.dll" executed="True" result="Failure" success="False" time="3.834" asserts="0">
+  <test-suite type="Assembly" name="C:\dev\dynamo\Dynamo.Tests\bin\Debug\Dynamo.Tests.dll" executed="True" result="Failure" success="False" time="4.241" asserts="0">
     <results>
-      <test-suite type="Namespace" name="Dynamo" executed="True" result="Failure" success="False" time="3.813" asserts="0">
+      <test-suite type="Namespace" name="Dynamo" executed="True" result="Failure" success="False" time="4.220" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="3.813" asserts="0">
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="4.220" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="DynamoTests" executed="True" result="Success" success="True" time="3.346" asserts="0">
+              <test-suite type="TestFixture" name="DynamoHostTests" executed="True" result="Success" success="True" time="2.439" asserts="0">
                 <results>
-                  <test-case name="Dynamo.Tests.DynamoTests.Can_create_dynamo_instance" executed="True" result="Success" success="True" time="0.821" asserts="1" />
-                  <test-case name="Dynamo.Tests.DynamoTests.Can_create_ruby_instance" executed="True" result="Success" success="True" time="2.473" asserts="1" />
-                  <test-case name="Dynamo.Tests.DynamoTests.Can_query_bridged_types" executed="True" result="Success" success="True" time="0.028" asserts="1" />
+                  <test-case name="Dynamo.Tests.DynamoHostTests.Can_create_dynamic_object_without_class" executed="True" result="Success" success="True" time="1.582" asserts="0">
+                    <reason>
+                      <message><![CDATA[]]></message>
+                    </reason>
+                  </test-case>
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="ImpromptuTests" executed="True" result="Failure" success="False" time="0.457" asserts="0">
+              <test-suite type="TestFixture" name="DynamoTests" executed="True" result="Success" success="True" time="1.430" asserts="0">
                 <results>
-                  <test-case name="Dynamo.Tests.ImpromptuTests.Should" executed="True" result="Success" success="True" time="0.341" asserts="1" />
-                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_be_able_to_impromptu_class_instance" executed="True" result="Error" success="False" time="0.013" asserts="0">
+                  <test-case name="Dynamo.Tests.DynamoTests.Can_create_dynamo_instance" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                  <test-case name="Dynamo.Tests.DynamoTests.Can_create_ruby_instance" executed="True" result="Success" success="True" time="1.385" asserts="1" />
+                  <test-case name="Dynamo.Tests.DynamoTests.Can_query_bridged_types" executed="True" result="Success" success="True" time="0.026" asserts="1" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="ImpromptuTests" executed="True" result="Failure" success="False" time="0.333" asserts="0">
+                <results>
+                  <test-case name="Dynamo.Tests.ImpromptuTests.Should" executed="True" result="Success" success="True" time="0.105" asserts="1" />
+                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_append_additional_dynamic_behaviour_once_converted" executed="True" result="Error" success="False" time="0.008" asserts="0">
                     <failure>
-                      <message><![CDATA[Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'Dynamo.Tests.Product' does not contain a definition for 'Buy']]></message>
-                      <stack-trace><![CDATA[at CallSite.Target(Closure , CallSite , Object , Func`3 )
+                      <message><![CDATA[Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'Dynamo.Tests.Product' does not contain a definition for 'Profit']]></message>
+                      <stack-trace><![CDATA[at CallSite.Target(Closure , CallSite , Object , Object )
 at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
-at Dynamo.Tests.ImpromptuTests.Should_be_able_to_impromptu_class_instance() in c:\dev\dynamo\Dynamo.Tests\ImpromptuTests.cs:line 46
+at ImpromptuInterface.Optimization.InvokeHelper.InvokeSetCallSite(Object target, String name, Object value, Type context, Boolean staticContext, CallSite& callSite)
+at ImpromptuInterface.Impromptu.InvokeSet(Object target, String name, Object value)
+at Dynamo.Tests.ImpromptuTests.Should_append_additional_dynamic_behaviour_once_converted() in c:\dev\dynamo\Dynamo.Tests\ImpromptuTests.cs:line 78
 ]]></stack-trace>
                     </failure>
                   </test-case>
-                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_create_dynamic_factory" executed="True" result="Success" success="True" time="0.097" asserts="1" />
+                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_be_able_to_impromptu_class_instance" executed="True" result="Success" success="True" time="0.191" asserts="2" />
+                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_convert_known_type_to_more_dynamic_type" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                  <test-case name="Dynamo.Tests.ImpromptuTests.Should_create_dynamic_factory" executed="True" result="Success" success="True" time="0.015" asserts="1" />
                 </results>
               </test-suite>
             </results>

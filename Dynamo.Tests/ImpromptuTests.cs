@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImpromptuInterface;
 using ImpromptuInterface.Dynamic;
+using System.Dynamic;
 
 namespace Dynamo.Tests
 {   [TestFixture]
@@ -43,21 +44,78 @@ namespace Dynamo.Tests
         {
             // try to take an object, make it dynamic, then do crazy shit, but then arrive back at the class, none the wiser
 
-            var product = new Product { Name = "Pen" };
-            dynamic dProduct = product;
-            dProduct.Buy = Return<bool>.Arguments<string, double>((prod, quantity) =>
+            var product = Build.NewObject( Name: "Pen" );
+            product.Buy = Return<bool>.Arguments<string, double>((prod, quantity) =>
             {
-                dProduct.Profit = 10 * quantity;
+                product.Profit = 10 * quantity;
                 Console.Write(string.Format("Order placed for {0} of {1}", quantity, prod));
                 return true;
             });
 
-            var order = Impromptu.ActLike<IOrderable>(dProduct);
-            var orderedProduct = Impromptu.ActLike<IProduct>(dProduct);
+            var order = Impromptu.ActLike<IOrderable>(product);
+            var orderedProduct = Impromptu.ActLike<IProduct>(product);
 
             Assert.That(orderedProduct.Name == "Pen");
+
+            order.Buy("Pen", 3);
+            Assert.That(order.Profit == 30);
         }
+
+        [Test]
+        public void Should_convert_known_type_to_more_dynamic_type()
+        {
+            var product = new Product {Name = "Pen" };
+
+            dynamic dProduct = product as dynamic;
+            Assert.That(dProduct.Name == "Pen");
+            //dynamic dProduct = Impromptu.InvokeConvert(product, typeof(dynamic), true);
+        }
+
+        [Test]
+        public void Should_append_additional_dynamic_behaviour_once_converted()
+        {
+            var product = new Product { Name = "Pen" };
+            Impromptu.InvokeSet(product, "Profit", default(double));
+            dynamic dProduct = product as dynamic;
+            var ex = new ExpandoObject();
+            
+            //dynamic dProduct = Impromptu.CoerceConvert(product, typeof(ImpromptuDictionary));
+            //dynamic dProduct = ImpromptuGet.Create(product);
+            //dProduct.Profit = default(double);
+            
+
+            dProduct.Buy = Return<bool>.Arguments<string, double>((price  , quantity) =>
+            {
+                Assert.Pass();
+                Console.Write(string.Format("Order placed for {0} of {1}", quantity, price));
+                return true;
+            });
+
+            //IOrderable order = Impromptu.ActLike<IOrderable>(dProduct);
+            //order.Buy("19.95", 4);
+            
+        }
+
+        public void Poco()
+        {
+            var tPoco = new Product();
+
+            var tSetValue = "1";
+
+            Impromptu.InvokeSet(tPoco, "Prop1", tSetValue);
+
+            Assert.AreEqual(tSetValue, tPoco.Prop1);
+        }
+
     }
+
+public class Reste
+{
+    public dynamic Cast(object obj, Type castTo)
+    {
+        return Impromptu.InvokeConvert(obj, castTo, true);
+    }
+}
 
 public interface IProduct
 {
@@ -71,7 +129,7 @@ public class Product : IProduct
 
 public interface IOrderable
 {
-    void Buy();
+    bool Buy(string prod, int quantity);
     double Profit { get; set; }
 }
 }
